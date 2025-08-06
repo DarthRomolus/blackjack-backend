@@ -1,9 +1,8 @@
 import {Router} from 'express';
 
 const router = Router();
-router.use('/start',);
+/*router.use('/start',);
 router.use('/stand',);
-router.use('/hit',);
-router.use('/end',)
+router.use('/hit',);*/
 
 export default router;
