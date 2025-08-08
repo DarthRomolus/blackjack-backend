@@ -3,6 +3,6 @@ import gameRoutes from './gameRoutes';
 
 const router=Router();
 
-router.use('/game',gameRoutes);
+router.use('/',gameRoutes);
 
 export default router;

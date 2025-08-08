@@ -1,8 +1,10 @@
 import {Router} from 'express';
+import { start,state } from '../controllers/gameController';
+
 
 const router = Router();
-/*router.use('/start',);
-router.use('/stand',);
-router.use('/hit',);*/
+router.post('/start',start);
+router.get('/state',state)
+
 
 export default router;
