@@ -1,4 +1,4 @@
-import type {Card, GameState} from "../types/gameTypes";
+import type {Card, GameState,Rank,} from "../types/gameTypes";
 import {createGameState} from "../utils/helpers"
 
 let gameState:GameState;
@@ -6,13 +6,15 @@ export function startGame():GameState{
     gameState=createGameState();
     return gameState;
 }
-export function hit(card:Card ){
-    if (!gameState.playerHand.handCards[0])
-    {
+export function hit(){
+    const card= gameState.deck.pop();
+    if(!card){
         return;
     }
-    gameState.playerHand.handCards[0].rank=card.rank;
-    gameState.playerHand.handCards[0].suit=card.suit;
+    gameState.playerHand.handCards.push(card);
+    gameState.playerHand.sum+=card.rank;
+    return gameState;
+ 
 
 }
 export function getState(){

@@ -10,7 +10,7 @@ export enum Rank{
     jack=10,
     dama=10,
     king=10,
-    ace=1|11
+    ace=11,
 }
 export enum Suit{
     heart="Heart",
