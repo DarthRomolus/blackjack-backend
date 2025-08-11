@@ -18,6 +18,14 @@ export enum Suit{
     spade="Spade",
     club="Club"
 }
+export enum GameStatus {
+  Playing = "Playing",
+  PlayerWins = "Player_Wins",
+  DealerWins = "Dealer_Wins",
+  Push = "Push",
+  Blackjack = "Blackjack",
+  Busted = "Busted"
+}
 export interface Card{
     suit:Suit;
     rank:Rank;
@@ -30,4 +38,5 @@ export interface GameState{
     deck:Card[];
     playerHand:Hand;
     dealerHand:Hand;
+    status:GameStatus;
 }

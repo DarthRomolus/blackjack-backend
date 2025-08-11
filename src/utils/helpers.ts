@@ -1,6 +1,18 @@
-import {Card, GameState,Rank,Suit} from "../types/gameTypes";
+import {Card, GameState,Rank,Suit,GameStatus} from "../types/gameTypes";
 
-
+function shuffleDeck(deck:Card[]) {
+    for (let i = 0; i < deck.length; i++) {
+        let shuffle = Math.floor(Math.random() * (deck.length));
+        let temp = deck[i];
+        if(deck[shuffle]){
+            deck[i] = deck[shuffle];
+        }
+        if(temp){
+            deck[shuffle] = temp;
+        }
+        
+    }
+};
 export function createDeck(): Card[] {
     const deck: Card[] = [];
     const suits = [Suit.heart, Suit.diamond, Suit.spade, Suit.club];
@@ -14,7 +26,7 @@ export function createDeck(): Card[] {
             deck.push({ suit, rank });
         }
     }
-
+    shuffleDeck(deck);
     return deck;
 }
 export function createGameState(): GameState {
@@ -26,6 +38,7 @@ export function createGameState(): GameState {
         dealerHand: { 
                 handCards: [],
                 sum: 0 
-            }
+            },
+        status:GameStatus.Playing,
     };
 }
