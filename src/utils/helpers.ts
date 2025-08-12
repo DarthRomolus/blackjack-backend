@@ -18,7 +18,7 @@ export function createDeck(): Card[] {
     const suits = [Suit.heart, Suit.diamond, Suit.spade, Suit.club];
     const ranks = [
         Rank.two, Rank.three, Rank.four, Rank.five, Rank.six, Rank.seven,
-        Rank.eight, Rank.nine, Rank.jack, Rank.dama, Rank.king, Rank.ace
+        Rank.eight, Rank.nine,Rank.ten, Rank.jack, Rank.dama, Rank.king, Rank.ace
     ];
 
     for (const suit of suits) {

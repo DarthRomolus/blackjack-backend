@@ -7,6 +7,7 @@ export enum Rank{
     seven=7,
     eight=8,
     nine=9,
+    ten=10,
     jack=10,
     dama=10,
     king=10,
