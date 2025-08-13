@@ -1,10 +1,13 @@
 import {Router} from 'express';
-import { start,state } from '../controllers/gameController';
+import { start,state,hit,stand,double } from '../controllers/gameController';
 
 
 const router = Router();
 router.post('/start',start);
-router.get('/state',state)
+router.post('/hit',hit);
+router.post('/stand',stand)
+router.post('/double',double)
+router.get('/state',state);
 
 
 export default router;
