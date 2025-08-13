@@ -1,44 +1,77 @@
-import {Card, GameState,Rank,Suit,GameStatus} from "../types/gameTypes";
+import { error } from "console";
+import {
+  Card,
+  GameState,
+  Rank,
+  Suit,
+  GameStatus,
+  Hand,
+} from "../types/gameTypes";
 
-function shuffleDeck(deck:Card[]) {
-    for (let i = 0; i < deck.length; i++) {
-        let shuffle = Math.floor(Math.random() * (deck.length));
-        let temp = deck[i];
-        if(deck[shuffle]){
-            deck[i] = deck[shuffle];
-        }
-        if(temp){
-            deck[shuffle] = temp;
-        }
-        
+function shuffleDeck(deck: Card[]) {
+  for (let i = 0; i < deck.length; i++) {
+    let shuffle = Math.floor(Math.random() * deck.length);
+    let temp = deck[i];
+    if (deck[shuffle]) {
+      deck[i] = deck[shuffle];
     }
-};
+    if (temp) {
+      deck[shuffle] = temp;
+    }
+  }
+}
 export function createDeck(): Card[] {
-    const deck: Card[] = [];
-    const suits = [Suit.heart, Suit.diamond, Suit.spade, Suit.club];
-    const ranks = [
-        Rank.two, Rank.three, Rank.four, Rank.five, Rank.six, Rank.seven,
-        Rank.eight, Rank.nine,Rank.ten, Rank.jack, Rank.dama, Rank.king, Rank.ace
-    ];
+  const deck: Card[] = [];
+  const suits = [Suit.heart, Suit.diamond, Suit.spade, Suit.club];
+  const ranks = [
+    Rank.two,
+    Rank.three,
+    Rank.four,
+    Rank.five,
+    Rank.six,
+    Rank.seven,
+    Rank.eight,
+    Rank.nine,
+    Rank.ten,
+    Rank.jack,
+    Rank.dama,
+    Rank.king,
+    Rank.ace,
+  ];
 
-    for (const suit of suits) {
-        for (const rank of ranks) {
-            deck.push({ suit, rank });
-        }
+  for (const suit of suits) {
+    for (const rank of ranks) {
+      deck.push({ suit, rank });
     }
-    shuffleDeck(deck);
-    return deck;
+  }
+  shuffleDeck(deck);
+  return deck;
+}
+function dealTwoCard(deck: Card[]): Hand {
+  let hand: Card[] = [];
+  const card1 = deck.pop();
+  const card2 = deck.pop();
+  if (!card1 || !card2) {
+    return {
+      handCards: [],
+      sum: 0,
+    };
+  }
+
+  hand.push(card1);
+  hand.push(card2);
+  return {
+    handCards: hand,
+    sum: card1.rank + card2.rank,
+  };
 }
 export function createGameState(): GameState {
-    return {
-        deck: createDeck(),
-        playerHand: {
-                 handCards: [],
-                sum: 0 },
-        dealerHand: { 
-                handCards: [],
-                sum: 0 
-            },
-        status:GameStatus.Playing,
-    };
+  const deck = createDeck();
+
+  return {
+    deck: deck,
+    playerHand: dealTwoCard(deck),
+    dealerHand: dealTwoCard(deck),
+    status: GameStatus.Playing,
+  };
 }
