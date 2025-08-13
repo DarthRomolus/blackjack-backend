@@ -1,4 +1,3 @@
-import { error } from "console";
 import {Card, GameState,Rank,GameStatus} from "../types/gameTypes";
 import {createGameState} from "../utils/helpers"
 
