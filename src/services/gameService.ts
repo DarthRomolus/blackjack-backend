@@ -20,8 +20,13 @@ export function hit(): GameState | boolean {
   }
   gameState.playerHand.handCards.push(card);
   gameState.playerHand.sum += card.rank;
+  gameState.double = false;
 
   return checkPlayer();
+}
+export function double() {
+  hit();
+  return stand();
 }
 export function stand(): GameState | boolean {
   while (gameState.dealerHand.sum < dealerHitLimit) {

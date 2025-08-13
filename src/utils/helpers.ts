@@ -73,5 +73,6 @@ export function createGameState(): GameState {
     playerHand: dealTwoCard(deck),
     dealerHand: dealTwoCard(deck),
     status: GameStatus.Playing,
+    double: true,
   };
 }
