@@ -11,8 +11,8 @@ export function startGame(): GameState {
 }
 export function hit(): GameState | boolean {
   if (gameState.playerHand.sum == win) {
-    gameState.status = GameStatus.PlayerWins;
-    stand();
+    gameState.status = GameStatus.Blackjack;
+    return stand();
   }
   const card = gameState.deck.pop();
   if (!card) {
