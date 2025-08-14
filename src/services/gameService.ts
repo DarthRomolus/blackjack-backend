@@ -11,7 +11,7 @@ export function startGame(): GameState {
 }
 export function hit(): GameState | boolean {
   if (gameState.playerHand.sum == win) {
-    gameState.status = GameStatus.Blackjack;
+    gameState.status = GameStatus.PlayerWins;
     stand();
   }
   const card = gameState.deck.pop();
@@ -69,16 +69,14 @@ function checkWhoWon() {
     gameState.status = GameStatus.Push;
     return gameState;
   }
-  // dealer has 21 and the player doesnt or dealer has more than the player and less than 21
-  if (
-    (dealerHandValue == win && gameState.status != GameStatus.PlayerWins) ||
-    (dealerHandValue > playerHandValue && dealerHandValue < win)
-  ) {
+  const dealerWin21NotPlayer =
+    dealerHandValue == win && gameState.status != GameStatus.PlayerWins;
+  const dealerCloserTo21 =
+    dealerHandValue > playerHandValue && dealerHandValue < win;
+  if (dealerWin21NotPlayer || dealerCloserTo21) {
     gameState.status = GameStatus.DealerWins;
     return gameState;
-  }
-  //the player has a blackjack or more than the dealer and less than 21 or the dealer busted and the player didnt
-  else {
+  } else {
     gameState.status = GameStatus.PlayerWins;
     return gameState;
   }
