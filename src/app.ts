@@ -6,7 +6,7 @@ import cors from "cors";
 let app = express();
 const PORT = 3000;
 app.use(express.json());
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(cors({ origin: "http://localhost:5173 " }));
 app.use("/game", mainRoutes);
 
 app.listen(PORT, () => {
