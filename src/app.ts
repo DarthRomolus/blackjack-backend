@@ -1,17 +1,19 @@
-import express from 'express';
-import type {Request ,Response} from 'express';
-import mainRoutes from './routes/mainRoutes'
+import express from "express";
+import type { Request, Response } from "express";
+import mainRoutes from "./routes/mainRoutes";
+import cors from "cors";
 
-let app=express();
-const PORT=3000;
+let app = express();
+const PORT = 3000;
 app.use(express.json());
-app.use('/game',mainRoutes)
+app.use(cors({ origin: "http://localhost:5173" }));
+app.use("/game", mainRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
 
-app.get("/",(req: Request,res: Response)=>{
-    console.log("getting");
-    res.send("hi");
-})
+app.get("/", (req: Request, res: Response) => {
+  console.log("getting");
+  res.send("hi");
+});
