@@ -10,6 +10,7 @@ export function startGame(): GameState {
   return gameState;
 }
 export function hit(): GameState | boolean {
+  let cardRank;
   if (gameState.playerHand.sum == win) {
     gameState.status = GameStatus.Blackjack;
     return stand();
@@ -19,7 +20,12 @@ export function hit(): GameState | boolean {
     return false;
   }
   gameState.playerHand.handCards.push(card);
-  gameState.playerHand.sum += card.rank;
+  if (card.rank === "queen" || card.rank == "king" || card.rank === "jack") {
+    cardRank = 10;
+  } else {
+    cardRank = card.rank;
+  }
+  gameState.playerHand.sum += cardRank;
   gameState.double = false;
 
   return checkPlayer();
@@ -29,13 +35,19 @@ export function double() {
   return stand();
 }
 export function stand(): GameState | boolean {
+  let cardRank;
   while (gameState.dealerHand.sum < dealerHitLimit) {
     const card = gameState.deck.pop();
     if (!card) {
       return false;
     }
+    if (card.rank === "queen" || card.rank == "king" || card.rank === "jack") {
+      cardRank = 10;
+    } else {
+      cardRank = card.rank;
+    }
     gameState.dealerHand.handCards.push(card);
-    gameState.dealerHand.sum += card.rank;
+    gameState.dealerHand.sum += cardRank;
   }
   return checkWhoWon();
 }

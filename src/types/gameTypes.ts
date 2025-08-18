@@ -8,9 +8,9 @@ export enum Rank {
   eight = 8,
   nine = 9,
   ten = 10,
-  jack = 10,
-  dama = 10,
-  king = 10,
+  jack = "jack",
+  dama = "queen",
+  king = "king",
   ace = 11,
 }
 export enum Suit {
