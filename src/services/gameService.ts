@@ -8,6 +8,9 @@ const aceIsEleven = 11;
 
 export function startGame(): GameState {
   gameState = createGameState();
+  if (gameState.playerHand.sum === win) {
+    gameState.status = GameStatus.Blackjack;
+  }
   return gameState;
 }
 export function hit(): GameState | boolean | string {
@@ -19,7 +22,7 @@ export function hit(): GameState | boolean | string {
   let numOfAcePlayer = gameState.playerHand.numOfAce;
   let sumOfCardPlayer = gameState.playerHand.sum;
 
-  if (gameState.playerHand.sum == win) {
+  if (gameState.playerHand.sum === win) {
     gameState.status = GameStatus.Blackjack;
     return stand();
   }
