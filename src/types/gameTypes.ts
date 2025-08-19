@@ -11,13 +11,13 @@ export enum Rank {
   jack = "jack",
   dama = "queen",
   king = "king",
-  ace = 11,
+  ace = "ace",
 }
 export enum Suit {
-  heart = "Heart",
-  diamond = "Diamond",
-  spade = "Spade",
-  club = "Club",
+  heart = "hearts",
+  diamond = "diamonds",
+  spade = "spades",
+  club = "clubs",
 }
 export enum GameStatus {
   Playing = "Playing",
@@ -34,6 +34,7 @@ export interface Card {
 export interface Hand {
   handCards: Card[];
   sum: number;
+  numOfAce: number;
 }
 export interface GameState {
   deck: Card[];

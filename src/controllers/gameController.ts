@@ -17,11 +17,23 @@ export function state(req: Request, res: Response) {
 }
 export function hit(req: Request, res: Response) {
   const newGameState = hitCard();
-  res.status(201).json(newGameState);
+  if (newGameState === false) {
+    res.status(500).json({ error: "internal server error" });
+  } else if (newGameState === "over21") {
+    res.status(400).json({ error: "bad request" });
+  } else {
+    res.status(201).json(newGameState);
+  }
 }
 export function double(req: Request, res: Response) {
   const newGameState = doubleTurn();
-  res.status(201).json(newGameState);
+  if (newGameState === false) {
+    res.status(500).json({ error: "internal server error" });
+  } else if (newGameState === "doubleNotAllowed") {
+    res.status(400).json({ error: "bad request" });
+  } else {
+    res.status(201).json(newGameState);
+  }
 }
 export function stand(req: Request, res: Response) {
   const newGameState = standTurn();
